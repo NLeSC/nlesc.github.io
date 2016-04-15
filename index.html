@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="home">
+
+<p>
+Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherlands eScience center projects</a>.
+</p>
+
+<div class="organizations">
+    {% for organization in site.organizations %}
+    <div class="organization">
+        <a href="{{ organization.homepage }}">
+            <table><tr><td>
+                <img class="avatar" src="{{ organization.avatar }}"/>
+            </td><td>
+                <h2>{{ organization.title }}</h2>
+            </td></tr></table>
+            <p>
+                {{ organization.content }}
+            </p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
