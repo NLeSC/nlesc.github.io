@@ -9,19 +9,39 @@ Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherl
 </p>
 
 <div class="organizations">
-    {% for organization in site.organizations %}
+    {% for org in site.organization %}
     <div class="organization">
-        <a href="{{ organization.homepage }}">
-            <table><tr><td>
-                <img class="avatar" src="{{ organization.avatar }}"/>
-            </td><td>
-                <h2>{{ organization.title }}</h2>
-            </td></tr></table>
-            <p>
-                {{ organization.content }}
-            </p>
+        <a href="{{ org.website }}">
+          <table><tr><td>
+            <img class="organization-logo" src="{{ org.logo }}"/>
+          </td><td>
+            <h2>{{ org.name }}</h2>
+          </td></tr></table>
         </a>
-    </div>
+        {% unless org.usedIn == null || org.usedIn == empty %}
+      <div class="dropdown project-dropdown">
+        <button class="dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-link"></span>
+        </button>
+        <ul class="dropdown-menu">
+        {% for project in org.usedIn %}
+          <li>
+          {% if project.name == null %}
+            <a href="{{ project }}"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ project | split: '/' | last }}</a></li>
+          {% elsif project.nlescWebsite == null %}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ project.name }}
+          {% else %}
+            <a href="{{ project.nlescWebsite }}"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
+          {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+      {% endunless %}
+        <p class="content">
+          {{ org.content }}
+        </p>
+      </div>
     {% endfor %}
 </div>
 

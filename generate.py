@@ -15,35 +15,43 @@
 # limitations under the License.
 import argparse
 import github3
+import requests
 
 
 def generate_organization(organization):
     gh = github3.GitHub()
     org = gh.organization(organization)
-    fn = '_organizations/' + org.login.lower() + '.md'
+    fn = '_organization/{0}.md'.format(org.login.lower())
+
+    website = 'http://{0}.github.io/'.format(org.login.lower())
+    req = requests.get(website)
+    if req.status_code >= 400:
+       website = org.html_url
+
     title = org.name
     if not title:
         title = org.login
-    body = org._json_data.get('description', '')
-    if not body:
-        body = ''
+    description = org._json_data.get('description', '')
     template = """---
-title: {title}
-homepage: {homepage}
-avatar: {avatar}
+name: {name}
+website: {website}
+logo: {avatar}
+usedIn:
+- http://software.esciencecenter.nl/project/myprojectname
 ---
-{body}
+{description}
     """
     with open(fn, 'w') as f:
-        f.write(template.format(title=title,
-                                homepage=org.html_url,
+        f.write(template.format(name=title,
+                                website=website,
                                 avatar=org.avatar_url,
-                                body=body))
+                                description=description))
 
 
 def main():
     parser = argparse.ArgumentParser(description='Generate Jekyll files')
-    parser.add_argument('organization', nargs='+', help='Github organization or user name')
+    parser.add_argument('organization', nargs='+', help='GitHub organization '
+                                                        'or user name')
     args = parser.parse_args()
     for organization in args.organization:
         generate_organization(organization)

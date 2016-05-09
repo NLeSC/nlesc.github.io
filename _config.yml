@@ -10,6 +10,7 @@ title: Netherlands eScience Center Github organizations
 email: info@esciencecenter.nl
 description: Overview of Github organizations of all NLeSC projects
 baseurl: "" # the subpath of your site, e.g. /blog
+url: http://nlesc.github.io
 twitter_username: esciencecenter
 github_username: NLeSC
 
@@ -17,4 +18,4 @@ github_username: NLeSC
 markdown: kramdown
 permalink: pretty
 collections:
-- organizations
+- organization
