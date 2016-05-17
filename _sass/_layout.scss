@@ -212,6 +212,9 @@
     width: 270px;
 }
 
+.organization:hover {
+   background: darken($background-color, 1%);
+}
 
 .organization > a {
     color: inherit;
@@ -219,6 +222,11 @@
     text-decoration: none;
     width: 230px;
     float: left;
+}
+
+.organization:hover > a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .organization-logo {
@@ -241,7 +249,9 @@
 }
 
 .organization .project-dropdown {
-    margin-top: 25px;
+    margin-top: -5px;
+    margin-right: -5px;
+    position: relative;
     float: right;
 }
 

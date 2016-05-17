@@ -20,27 +20,32 @@ Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherl
         </a>
         {% unless org.usedIn == null || org.usedIn == empty %}
       <div class="dropdown project-dropdown">
-        <button class="dropdown-toggle" data-toggle="dropdown">
+        <button title="More links" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span class="glyphicon glyphicon-link"></span>
         </button>
         <ul class="dropdown-menu">
+        <li>
+            <a href="{{ org.website }}" title="Home"><span class="glyphicon glyphicon-home"></span>&nbsp;Github organization</a>
+        </li>
         {% for project in org.usedIn %}
           <li>
           {% if project.name == null %}
-            <a href="{{ project }}"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ project | split: '/' | last }}</a></li>
+            <a href="{{ project }}" title="eStep project"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ project | split: '/' | last }}</a></li>
           {% elsif project.nlescWebsite == null %}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ project.name }}
+            <a title="NLeSC project"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
           {% else %}
-            <a href="{{ project.nlescWebsite }}"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
+            <a href="{{ project.nlescWebsite }}" title="NLeSC project"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
           {% endif %}
           </li>
         {% endfor %}
         </ul>
       </div>
       {% endunless %}
-        <p class="content">
-          {{ org.content }}
-        </p>
+        <a href="{{ org.website }}">
+          <p class="content">
+            {{ org.content }}
+          </p>
+        </a>
       </div>
     {% endfor %}
 </div>
