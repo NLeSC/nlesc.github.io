@@ -16,9 +16,12 @@ python generate.py <github organization name>
     * website: Human-friendly url of project software website (preferably
       http://organization.github.io)
     * logo: Url of profile image
-    * usedIn: http://software.esciencecenter.nl project URLs where the
-      GitHub organization is used in. If the project is not registered
-      there, give an object with name and nlescWebsite properties.
+    * nlescPage: https://www.esciencecenter.nl/projects project URLs where the
+      GitHub organization is used in.
+    * nlescPages: When Github organization is used in multiple https://www.esciencecenter.nl/projects project URLs, value is hash with key is project name and value is URL
+    * estepPage: http://software.esciencecenter.nl project URLs where the
+      GitHub organization is used in.
+    * estepPages: When Github organization is used in multiple http://software.esciencecenter.nl project URLs, value is hash with key is project name and value is URL
 
     The name, website and logo properties are mandatory.
 

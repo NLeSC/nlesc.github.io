@@ -18,7 +18,6 @@ Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherl
             <h2>{{ org.name }}</h2>
           </td></tr></table>
         </a>
-        {% unless org.usedIn == null || org.usedIn == empty %}
       <div class="dropdown project-dropdown">
         <button title="More links" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span class="glyphicon glyphicon-link"></span>
@@ -27,10 +26,48 @@ Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherl
         <li>
             <a href="{{ org.website }}" title="Home"><span class="glyphicon glyphicon-home"></span>&nbsp;Github organization</a>
         </li>
+        {% if org.nlescPage %}
+        <li>
+            <a href="{{ org.nlescPage }}" title="NLeSC project"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;NLeSC project page</a>
+        </li>
+        {% endif %}
+        {% if org.nlescPages %}
+            <li class="dropdown-header">NLeSC project pages</li>
+            {% for nlescPageHash in org.nlescPages %}
+            {% for nlescPage in nlescPageHash %}
+                <li>
+                    {% if nlescPage.size == 2 %}
+                    <a href="{{ nlescPage[1] }}"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{ nlescPage[0] }}</a>
+                    {% else %}
+                    <a><span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{ nlescPage }}</a>
+                    {% endif%}
+                </li>
+            {% endfor%}
+            {% endfor%}
+        {% endif %}
+        {% if org.estepPage %}
+        <li>
+            <a href="{{ org.estepPage }}" title="eStep software project"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;eStep sofware project</a>
+        </li>
+        {% endif %}
+        {% if org.estepPages %}
+            <li class="dropdown-header">NLeSC project pages</li>
+            {% for estepPageHash in org.estepPages %}
+            {% for estepPage in estepPageHash %}
+                <li>
+                    {% if estepPage.size == 2 %}
+                    <a href="{{ estepPage[1] }}"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{{ estepPage[0] }}</a>
+                    {% else %}
+                    <a><span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{ estepPage }}</a>
+                    {% endif%}
+                </li>
+            {% endfor%}
+            {% endfor%}
+        {% endif %}
         {% for project in org.usedIn %}
           <li>
           {% if project.name == null %}
-            <a href="{{ project }}" title="eStep project"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ project | split: '/' | last }}</a></li>
+            <a href="{{ project }}" title="eStep project"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{{ project | split: '/' | last }}</a></li>
           {% elsif project.nlescWebsite == null %}
             <a title="NLeSC project"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
           {% else %}
@@ -40,7 +77,6 @@ Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherl
         {% endfor %}
         </ul>
       </div>
-      {% endunless %}
         <a href="{{ org.website }}">
           <p class="content">
             {{ org.content }}
