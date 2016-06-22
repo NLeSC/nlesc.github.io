@@ -36,10 +36,11 @@ def generate_organization(organization):
 name: {name}
 website: {website}
 logo: {avatar}
-nlescPage: https://www.esciencecenter.nl/project/myprojectname
-# If there are multiple nlesc project pages use nlescPages property with hash key=name and value=url
-estepPage: http://software.esciencecenter.nl/project/myprojectname
-# If there are multiple estep project pages use estepPages property with hash key=name and value=url
+involvedProject:
+- name: {name}
+  website: http://publicwebsite.nl/
+  nlescWebsite: https://www.esciencecenter.nl/project/myprojectname
+  estepId: http://software.esciencecenter.nl/project/myprojectname
 ---
 {description}
     """
