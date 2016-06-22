@@ -5,7 +5,7 @@ layout: default
 <div class="home">
 
 <p>
-Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherlands eScience center projects</a>.
+GitHub organizations of <a href="https://www.esciencecenter.nl/projects">Netherlands eScience center projects</a>.
 </p>
 
 <div class="organizations">
@@ -26,55 +26,20 @@ Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherl
         <li>
             <a href="{{ org.website }}" title="Home"><span class="glyphicon glyphicon-home"></span>&nbsp;Github organization</a>
         </li>
-        {% if org.nlescPage %}
-        <li>
-            <a href="{{ org.nlescPage }}" title="NLeSC project"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;NLeSC project page</a>
-        </li>
+        {% if org.involvedProject %}
+            {% for project in org.involvedProject %}
+                <li class="dropdown-header">{{project.name}}</li>
+                {% unless project.website == null %}
+                  <li><a href="{{ project.website }}"><span class="glyphicon glyphicon glyphicon-globe"></span>&nbsp;Main website</a></li>
+                {% endunless %}
+                {% unless project.nlescWebsite == null %}
+                  <li><a href="{{ project.nlescWebsite }}"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;NLeSC project page</a></li>
+                {% endunless %}
+                {% unless project.estepId == null %}
+                  <li><a href="{{ project.estepId }}"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;NLeSC eStep page</a></li>
+                {% endunless %}
+            {% endfor %}
         {% endif %}
-        {% if org.nlescPages %}
-            <li class="dropdown-header">NLeSC project pages</li>
-            {% for nlescPageHash in org.nlescPages %}
-            {% for nlescPage in nlescPageHash %}
-                <li>
-                    {% if nlescPage.size == 2 %}
-                    <a href="{{ nlescPage[1] }}"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{ nlescPage[0] }}</a>
-                    {% else %}
-                    <a><span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{ nlescPage }}</a>
-                    {% endif%}
-                </li>
-            {% endfor%}
-            {% endfor%}
-        {% endif %}
-        {% if org.estepPage %}
-        <li>
-            <a href="{{ org.estepPage }}" title="eStep software project"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;eStep sofware project</a>
-        </li>
-        {% endif %}
-        {% if org.estepPages %}
-            <li class="dropdown-header">NLeSC project pages</li>
-            {% for estepPageHash in org.estepPages %}
-            {% for estepPage in estepPageHash %}
-                <li>
-                    {% if estepPage.size == 2 %}
-                    <a href="{{ estepPage[1] }}"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{{ estepPage[0] }}</a>
-                    {% else %}
-                    <a><span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{ estepPage }}</a>
-                    {% endif%}
-                </li>
-            {% endfor%}
-            {% endfor%}
-        {% endif %}
-        {% for project in org.usedIn %}
-          <li>
-          {% if project.name == null %}
-            <a href="{{ project }}" title="eStep project"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{{ project | split: '/' | last }}</a></li>
-          {% elsif project.nlescWebsite == null %}
-            <a title="NLeSC project"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
-          {% else %}
-            <a href="{{ project.nlescWebsite }}" title="NLeSC project"><span class="glyphicon glyphicon-th-large"></span>&nbsp;{{ project.name }}</a>
-          {% endif %}
-          </li>
-        {% endfor %}
         </ul>
       </div>
         <a href="{{ org.website }}">
