@@ -15,11 +15,14 @@
 # limitations under the License.
 import argparse
 import github3
+from github3.null import NullObject
 
 
 def generate_organization(organization):
     gh = github3.GitHub()
     org = gh.organization(organization)
+    if isinstance(org, NullObject):
+        raise KeyError('GitHub organization "{0}" could not be found'.format(organization))
     fn = '_organizations/' + org.login.lower() + '.md'
     title = org.name
     if not title:
