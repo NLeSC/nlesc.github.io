@@ -11,6 +11,7 @@ Run following script to generate a Markdown file in `_organizations/` directory.
 pip install -r requirements.txt
 python generate.py <github organization name>
 ```
+The `<github organization name>` should already exist.
 
 ### Manually
 
