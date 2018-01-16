@@ -8,10 +8,12 @@ Overview of Github organizations of all NLeSC projects.
 
 Run following script to generate a Markdown file in `_organizations/` directory.
 ```
+# (requires Python 3)
+# run from the project root
 pip install -r requirements.txt
 python generate.py <github organization name>
 ```
-The `<github organization name>` should already exist.
+The `<github organization name>` should already exist on GitHub.
 
 ### Manually
 
