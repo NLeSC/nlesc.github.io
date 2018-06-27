@@ -7,21 +7,27 @@ layout: default
 <p>
 Github organizations of <a href="https://www.esciencecenter.nl/projects">Netherlands eScience center projects</a>.
 </p>
-
-<div class="organizations">
+<!-- Use the .card-deck class creates a grid of cards that are of equal height and width. The layout will automatically adjust as you insert more cards, displayed vertically on small screens (less than 576px): -->
+<div class="card-deck">
     {% for organization in site.organizations %}
-    <div class="organization">
-        <a href="{{ organization.homepage }}">
-            <table><tr><td>
-                <img class="avatar" src="{{ organization.avatar }}"/>
-            </td><td>
-                <h2>{{ organization.title }}</h2>
-            </td></tr></table>
-            <p>
+    <!-- A card in Bootstrap 4 is a bordered box with some padding around its content. It includes options for headers, footers, content, colors, etc. -->
+        <div class="card text-center" style="min-width: 25%; margin-bottom: 1em !important;">
+          <div class="card-header">
+            <a href="{{ organization.homepage }}">
+                <h5 class="card-title">{{ organization.title }}</h5>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="{{ organization.homepage }}">
+                <!-- use the .rounded class to class adds rounded corners to an image and use .float-left to float the avatar img to the left side -->
+                <img class="avatar rounded float-left" src="{{ organization.avatar }}"/>
+            </a>
+            <p class="card-text">
                 {{ organization.content }}
             </p>
-        </a>
-    </div>
+          </div>
+          
+          </div> 
     {% endfor %}
 </div>
 
