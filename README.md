@@ -1,3 +1,10 @@
+# THIS REPO IS OBSOLETE
+Please add your info to the RSD at https://research-software-directory.org/
+For more information, ask your programme manager at the teams channel, in person, or send them an email at programme@esciencecenter.nl
+
+Original Readme follows below
+
+
 # NLeSC Github projects website
 
 Overview of Github organizations of all NLeSC projects.
